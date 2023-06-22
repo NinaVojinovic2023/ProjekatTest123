@@ -3,7 +3,10 @@ package page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,18 +51,27 @@ public class CartPage {
 
 
     public int productCount() {
+        this.waitForCartLoad();
         var allRows = rowsCollection();
         return allRows.size();
     }
 
     public String getTotalPrice() {
+        this.waitForCartLoad();
+//        if(driver.findElement(totalPrice) !=null) {
         return driver.findElement(totalPrice).getText();
     }
 
     public void deleteItemFromCart(int itemIndex) {
+        this.waitForCartLoad();
      var allRows = rowsCollection();
      allRows.get(itemIndex).findElement(By.linkText("Delete")).click();
     }
+    private void waitForCartLoad() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(totalPrice));
+    }
+
 
     private List<WebElement> rowsCollection() {
         return driver.findElements(totalPrice);

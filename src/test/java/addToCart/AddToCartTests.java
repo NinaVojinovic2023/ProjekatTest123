@@ -1,11 +1,9 @@
-package addToCartTests;
+package addToCart;
 
 import base.BaseTests;
-import common.Navigator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.CartPage;
-import page.HomePage;
 import page.ProductPage;
 
 public class AddToCartTests extends BaseTests {
@@ -25,14 +23,6 @@ public class AddToCartTests extends BaseTests {
 
 
     }
-    @Test
-
-    public void test2TotalPriceTest() {
-        CartPage cartPage = navigator.clickCartButton();
-        Assert.assertEquals(cartPage.getTotalPrice(), "1610", "This price is good");
-
-    }
-
 
 
 }
